@@ -7,8 +7,8 @@ return {
     "luvit/pretty-print"
   },
   files = {
-    "libs/**",
-    "*.lua",
-    "native/$OS-$ARCH**",
+    "**.lua",
+    "**.h",
+    "**/$OS-$ARCH**",
   }
 }
