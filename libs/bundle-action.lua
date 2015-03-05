@@ -1,3 +1,4 @@
+-- Proposed addition to bundle API in luvi
 local bundle = require('luvi').bundle
 local pathJoin = require('luvi').path.join
 local env = require('env')
@@ -6,7 +7,7 @@ local uv = require('uv')
 local tmpBase = os == "Windows" and (env.get("TMP") or uv.cwd()) or
                                     (env.get("TMPDIR") or '/tmp')
 
-function bundle.apply(path, action)
+function bundle.action(path, action)
   -- If it's a real path, run it directly.
   if uv.fs_access(path, "r") then return action(path) end
   -- Otherwise, copy to a temporary folder and run from there

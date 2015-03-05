@@ -1,14 +1,14 @@
 local ffi = require('ffi')
 local bundle = require('luvi').bundle
 
-require('./bundle-apply')
+require('./bundle-action')
 
 -- Get path
 local dir = "native/" .. ffi.os .. "-" .. ffi.arch
 local entries = bundle.readdir(dir)
 local path = dir .. '/' .. entries[1]
 
-local glfw = bundle.apply(path, function (path)
+local glfw = bundle.action(path, function (path)
   return ffi.load(path)
 end)
 
