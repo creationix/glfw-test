@@ -3,6 +3,7 @@ local bundle = require('luvi').bundle
 local pathJoin = require('luvi').path.join
 local env = require('env')
 local uv = require('uv')
+local os = require('ffi').os
 
 local tmpBase = os == "Windows" and (env.get("TMP") or uv.cwd()) or
                                     (env.get("TMPDIR") or '/tmp')
