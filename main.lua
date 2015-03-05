@@ -20,27 +20,50 @@ end
 jit.off(keyCallback)
 glfw.glfwSetKeyCallback(window, keyCallback)
 
-local function posCallback(window, x, y)
+local function posCallback(window, xPos, yPos)
   p{
     type="POS",
     window = window,
-    x = x,
-    y = y,
+    xPos = xPos,
+    yPos = yPos,
   }
 end
 jit.off(posCallback)
 glfw.glfwSetWindowPosCallback(window, posCallback)
 
-local function sizeCallback(window, w, h)
+local function sizeCallback(window, width, height)
   p{
-    type="SIZE",
-    window=window,
-    w=w,
-    h=h
+    type = "SIZE",
+    window = window,
+    width = width,
+    height = height,
   }
 end
 jit.off(sizeCallback)
 glfw.glfwSetWindowSizeCallback(window, sizeCallback)
+
+local function mouseButtonCallback(window, button, action, mods)
+  p{
+    type = "MOUSE_BUTTON",
+    window = window,
+    button = button,
+    action = action,
+    mods = mods,
+  }
+end
+jit.off(mouseButtonCallback)
+glfw.glfwSetMouseButtonCallback(window, mouseButtonCallback)
+
+local function cursorPosCallback(window, xPos, yPos)
+  p{
+    type = "CURSOR_POS",
+    window = window,
+    xPos = xPos,
+    yPos = yPos,
+  }
+end
+jit.off(cursorPosCallback)
+glfw.glfwSetCursorPosCallback(window, cursorPosCallback)
 
 -- Loop until the user closes the window
 while glfw.glfwWindowShouldClose(window) == 0 do
