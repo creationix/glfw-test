@@ -4,7 +4,8 @@ return {
   private = true,
   dependencies = {
     "luvit/require",
-    "luvit/pretty-print"
+    "luvit/pretty-print",
+    "creationix/glfw",
   },
   files = {
     "**.lua",

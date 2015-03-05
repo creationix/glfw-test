@@ -1,3 +1,6 @@
+exports.name = "creationix/glfw"
+exports.version = "3.1.0"
+
 local ffi = require('ffi')
 local bundle = require('luvi').bundle
 
