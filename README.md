@@ -3,7 +3,9 @@ A test app for using glfw in luvit 2.0
 
 ## Testing
 
-To test this program run the following on a unix machine:
+Currently I only have binaries for OSX-x64, Linux-x64 and Window-x64.
+
+To test this program run the following on a linux or OSX machine:
 
 ```sh
 curl -L https://github.com/luvit/lit/raw/master/get-lit.sh | sh
