@@ -72,23 +72,24 @@ while glfw.glfwWindowShouldClose(window) == 0 do
 
   while true do
     local event = wrapper.GLFWEventShift()
+    p(event)
     if event == nil then break end
     if event.type == wrapper.GLFWwindowposevt then
-      event = {
+      p {
         type = "POS",
         window = event.window,
         xpos = event.xpos,
         ypos = event.ypos
       }
     elseif event.type == wrapper.GLFWwindowsizeevt then
-      event = {
+      p {
         type = "SIZE",
         window = event.window,
         xpos = event.width,
         ypos = event.height
       }
     end
-    p(event)
+    wrapper.GLFWEventRelease(event)
   end
 
   --TODO: render
