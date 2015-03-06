@@ -1,4 +1,4 @@
-local glfw, wrapper = unpack(require('glfw'))
+local glfw, wrapper, toLua = unpack(require('glfw'))
 
 assert(glfw.glfwInit() ~= 0, "Failed to initialize GLFW")
 
@@ -7,95 +7,27 @@ local window = glfw.glfwCreateWindow(640, 480, "Hello World", nil, nil)
 glfw.glfwMakeContextCurrent(window)
 -- glfw.glfwSwapInterval(1)
 
-glfw.glfwSetWindowPosCallback(window, wrapper.GLFWwindowposCallback)
-glfw.glfwSetWindowSizeCallback(window, wrapper.GLFWwindowsizeCallback)
--- local function keyCallback(window, key, scancode, action, mods)
---   p{
---     type = "KEY",
---     window = window,
---     key = key,
---     scancode = scancode,
---     action = action,
---     mods = mods
---   }
--- end
--- jit.off(keyCallback)
--- glfw.glfwSetKeyCallback(window, keyCallback)
-
--- local function posCallback(window, xPos, yPos)
---   p{
---     type="POS",
---     window = window,
---     xPos = xPos,
---     yPos = yPos,
---   }
--- end
--- jit.off(posCallback)
--- glfw.glfwSetWindowPosCallback(window, posCallback)
-
--- local function sizeCallback(window, width, height)
---   p{
---     type = "SIZE",
---     window = window,
---     width = width,
---     height = height,
---   }
--- end
--- jit.off(sizeCallback)
--- glfw.glfwSetWindowSizeCallback(window, sizeCallback)
-
--- local function mouseButtonCallback(window, button, action, mods)
---   p{
---     type = "MOUSE_BUTTON",
---     window = window,
---     button = button,
---     action = action,
---     mods = mods,
---   }
--- end
--- jit.off(mouseButtonCallback)
--- glfw.glfwSetMouseButtonCallback(window, mouseButtonCallback)
-
--- local function cursorPosCallback(window, xPos, yPos)
---   p{
---     type = "CURSOR_POS",
---     window = window,
---     xPos = xPos,
---     yPos = yPos,
---   }
--- end
--- jit.off(cursorPosCallback)
--- glfw.glfwSetCursorPosCallback(window, cursorPosCallback)
+glfw.glfwSetWindowPosCallback(window, wrapper.glfwWindowPosCallback)
+glfw.glfwSetWindowSizeCallback(window, wrapper.glfwWindowSizeCallback)
+glfw.glfwSetKeyCallback(window, wrapper.glfwKeyCallback)
+glfw.glfwSetMouseButtonCallback(window, wrapper.glfwMouseButtonCallback)
+glfw.glfwSetCursorPosCallback(window, wrapper.glfwCursorPosCallback)
 
 -- Loop until the user closes the window
 while glfw.glfwWindowShouldClose(window) == 0 do
 
+  -- Consume and log all events
   while true do
-    local event = wrapper.GLFWEventShift()
+    local event = wrapper.glfwEventShift()
     if event == nil then break end
-    p(event)
-    if event.type == wrapper.GLFWwindowposevt then
-      p {
-        type = "POS",
-        window = event.window,
-        xpos = event.xpos,
-        ypos = event.ypos
-      }
-    elseif event.type == wrapper.GLFWwindowsizeevt then
-      p {
-        type = "SIZE",
-        window = event.window,
-        xpos = event.width,
-        ypos = event.height
-      }
-    end
-    wrapper.GLFWEventRelease(event)
+    p(toLua(event))
+    wrapper.glfwEventRelease(event)
   end
 
-  --TODO: render
+  -- --TODO: render
 
-  -- Swap front and back buffers
-  glfw.glfwSwapBuffers(window)
+  -- -- Swap front and back buffers
+  -- glfw.glfwSwapBuffers(window)
 
   -- Wait for and process events
   glfw.glfwWaitEvents();
