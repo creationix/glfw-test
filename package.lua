@@ -8,8 +8,6 @@ return {
     "creationix/glfw",
   },
   files = {
-    "**.lua",
-    "**.h",
-    "**/$OS-$ARCH**",
+    "*.lua",
   }
 }
