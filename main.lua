@@ -72,8 +72,8 @@ while glfw.glfwWindowShouldClose(window) == 0 do
 
   while true do
     local event = wrapper.GLFWEventShift()
-    p(event)
     if event == nil then break end
+    p(event)
     if event.type == wrapper.GLFWwindowposevt then
       p {
         type = "POS",
